@@ -20,14 +20,37 @@
 #include <stdio.h>
 
 
+#define RCC_BASE 	0x40023800
+#define RCC_AHB1ENR *((volatile uint32_t*)(RCC_BASE + 0x30))
+#define GPIOA_BASE  0x40020000
+#define GPIOA_MODER	*((volatile uint32_t*)(GPIOA_BASE + 0x00))
+#define GPIOA_ODR	*((volatile uint32_t*)(GPIOA_BASE + 0x14))
+
+
 extern void ITM_SendChar(uint8_t ch);
 
 
+void delay(uint32_t delay){
+	for(uint32_t i = 0;i<delay;i++){
+		for(uint32_t j = 0;j<2000;j++);
+	}
+}
+
 int main(void)
 {
+	RCC_AHB1ENR |= 1U<<0;
+
+	GPIOA_MODER &=~ (1U<<2*5);
+	GPIOA_MODER |= 1U<<10;
+
+
 	puts("!!!Hello World!!!");
     /* Loop forever */
-	for(;;);
+	for(;;){
+
+		GPIOA_ODR ^= 1U<<5;
+		delay(100);
+	}
 }
 
 
