@@ -29,7 +29,8 @@ int main(void) {
 	uint16_t numOctal = 013;  	//decimal 		-> 11
 	uint32_t numHex = 0x13;		//decimal		-> 19
 	uint8_t numBin = 0b1010;	//decimal		-> 10
-
+	float pi = 3.14;
+	int res;
 /*****************************************************/
 
 	printf("NUMERO OCTAL->%d\n",numOctal);
@@ -41,6 +42,13 @@ int main(void) {
 
 	ch = 98;
 	printf("letra->%d\n",ch);
+/*****************************************************/
+	res = (int)(pi * numBin + 4.5553434);				//conversion de tipos
+
+/**
+ * UBRR = (float)FOSC/(16 * BAUD) - 1
+ * (float)11 / 5 = 2.2
+ */
 
 	system("PAUSE");
 	return EXIT_SUCCESS;
